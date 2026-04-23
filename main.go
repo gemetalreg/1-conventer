@@ -57,28 +57,13 @@ func userInputTarget(curr1 string) string {
 }
 
 func calc(count float64, curr1 string, curr2 string) (res float64) {
-	switch curr1 {
-	case "USD":
-		switch curr2 {
-		case "EUR":
-			return 0.85 * count
-		case "RUB":
-			return 76.23 * count
-		}
-	case "EUR":
-		switch curr2 {
-		case "USD":
-			return 1.18 * count
-		case "RUB":
-			return 89.65 * count
-		}
-	case "RUB":
-		switch curr2 {
-		case "USD":
-			return 0.013 * count
-		case "EUR":
-			return 0.011 * count
-		}
-	}
-	return 0
+	m := map[string]map[string]float64{}
+	m["USD"]["EUR"] = 0.85
+	m["USD"]["RUB"] = 76.23
+	m["EUR"]["USD"] = 1.18
+	m["EUR"]["RUB"] = 89.65
+	m["RUB"]["USD"] = 0.013
+	m["RUB"]["EUR"] = 0.011
+
+	return m[curr1][curr2] * count
 }
