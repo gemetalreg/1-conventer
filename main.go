@@ -58,6 +58,11 @@ func userInputTarget(curr1 string) string {
 
 func calc(count float64, curr1 string, curr2 string) (res float64) {
 	m := map[string]map[string]float64{}
+
+	m["USD"] = map[string]float64{}
+	m["EUR"] = map[string]float64{}
+	m["RUB"] = map[string]float64{}
+
 	m["USD"]["EUR"] = 0.85
 	m["USD"]["RUB"] = 76.23
 	m["EUR"]["USD"] = 1.18
