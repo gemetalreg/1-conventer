@@ -7,7 +7,20 @@ func main() {
 	num := userInputNum()
 	curr2 := userInputTarget(curr1)
 
-	res := calc(num, curr1, curr2)
+	m := map[string]map[string]float64{}
+
+	m["USD"] = map[string]float64{}
+	m["EUR"] = map[string]float64{}
+	m["RUB"] = map[string]float64{}
+
+	m["USD"]["EUR"] = 0.85
+	m["USD"]["RUB"] = 76.23
+	m["EUR"]["USD"] = 1.18
+	m["EUR"]["RUB"] = 89.65
+	m["RUB"]["USD"] = 0.013
+	m["RUB"]["EUR"] = 0.011
+
+	res := calc(&m, num, curr1, curr2)
 	fmt.Println(res)
 
 }
@@ -56,19 +69,7 @@ func userInputTarget(curr1 string) string {
 	return input
 }
 
-func calc(count float64, curr1 string, curr2 string) (res float64) {
-	m := map[string]map[string]float64{}
+func calc(m *map[string]map[string]float64, count float64, curr1 string, curr2 string) (res float64) {
 
-	m["USD"] = map[string]float64{}
-	m["EUR"] = map[string]float64{}
-	m["RUB"] = map[string]float64{}
-
-	m["USD"]["EUR"] = 0.85
-	m["USD"]["RUB"] = 76.23
-	m["EUR"]["USD"] = 1.18
-	m["EUR"]["RUB"] = 89.65
-	m["RUB"]["USD"] = 0.013
-	m["RUB"]["EUR"] = 0.011
-
-	return m[curr1][curr2] * count
+	return (*m)[curr1][curr2] * count
 }
